@@ -25,7 +25,7 @@ interface UserMediaState {
   requestPermissionAndPopulateDevices: () => void;
   requestPermissionAndStartDevices: (
     microphoneDeviceId?: string,
-    cameraDeviceId?: string
+    cameraDeviceId?: string,
   ) => Promise<void>;
 
   getCamera: (deviceId: string) => Promise<LocalTrack>;
@@ -83,11 +83,9 @@ export const UserMediaProvider: React.FC<Props> = ({ children }) => {
     setMicrophoneDeviceId,
     userWantsMicMuted,
   } = React.useContext(UserContext);
-  const [microphoneDevices, setMicrophoneDevices] = useState<InputDeviceInfo[]>(
-    []
-  );
+  const [microphoneDevices, setMicrophoneDevices] = useState<any[]>([]);
   const [activeMicrophone, setActiveMicrophone] = useState<LocalTrack>();
-  const [cameraDevices, setCameraDevices] = useState<InputDeviceInfo[]>([]);
+  const [cameraDevices, setCameraDevices] = useState<any[]>([]);
   const [activeCamera, setActiveCamera] = useState<LocalTrack>();
   const [localAudioAnalyser, setLocalAudioAnalyser] = useState<AnalyserNode>();
   const [userMediaError, setUserMediaError] = useState<string>();
@@ -116,12 +114,12 @@ export const UserMediaProvider: React.FC<Props> = ({ children }) => {
     const availableDevices = await navigator.mediaDevices.enumerateDevices();
 
     const audioInputDevices = availableDevices.filter(
-      (device) => device.kind === "audioinput"
+      (device) => device.kind === "audioinput",
     );
     setMicrophoneDevices(audioInputDevices);
 
     const videoInputDevices = availableDevices.filter(
-      (device) => device.kind === "videoinput"
+      (device) => device.kind === "videoinput",
     );
     setCameraDevices(videoInputDevices);
   }, []);
@@ -235,7 +233,7 @@ export const UserMediaProvider: React.FC<Props> = ({ children }) => {
       setMicrophoneDeviceId,
       setCameraDeviceId,
       userWantsMicMuted,
-    ]
+    ],
   );
 
   const muteActiveMicrophone = useCallback(() => {
@@ -308,14 +306,14 @@ export const UserMediaProvider: React.FC<Props> = ({ children }) => {
 
       return tracks[0];
     },
-    [setupLocalMicrophoneAnalyser, setMicrophoneDeviceId, userWantsMicMuted]
+    [setupLocalMicrophoneAnalyser, setMicrophoneDeviceId, userWantsMicMuted],
   );
 
   const changeActiveMicrophone = useCallback(
     async (deviceId: string) => {
       await getMicrophone(deviceId);
     },
-    [getMicrophone]
+    [getMicrophone],
   );
 
   const getActiveMicrophoneLevel = useCallback(() => {
@@ -398,14 +396,14 @@ export const UserMediaProvider: React.FC<Props> = ({ children }) => {
 
       return tracks[0];
     },
-    [setCameraDeviceId]
+    [setCameraDeviceId],
   );
 
   const changeActiveCamera = useCallback(
     async (deviceId: string) => {
       await getCamera(deviceId);
     },
-    [getCamera]
+    [getCamera],
   );
 
   const stopActiveCamera = useCallback(() => {
@@ -433,7 +431,7 @@ export const UserMediaProvider: React.FC<Props> = ({ children }) => {
     return () => {
       navigator.mediaDevices.removeEventListener(
         "devicechange",
-        onDeviceChange
+        onDeviceChange,
       );
     };
   }, [onDeviceChange]);

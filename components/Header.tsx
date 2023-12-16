@@ -1,9 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import { AiFillGithub } from "react-icons/ai";
-import { Flex, Spacer } from "@chakra-ui/react";
+import { Flex, Spacer, Button } from "@chakra-ui/react";
 
 import muxLogo from "../public/mux-logo.svg";
+import Link from "next/link";
 
 export default function Header(): JSX.Element {
   return (
@@ -32,13 +33,13 @@ export default function Header(): JSX.Element {
       </Flex>
       <Spacer />
       <Flex alignItems="center" padding="10px">
-        <a
-          href="https://github.com/muxinc/meet"
+        <Link
+          href="https://github.com/SujalShah3234/mux-meet"
           target="_blank"
           rel="noreferrer"
         >
           <AiFillGithub color="white" size="40px" />
-        </a>
+        </Link>
       </Flex>
     </Flex>
   );

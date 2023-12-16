@@ -55,7 +55,7 @@ const Home = () => {
       } else {
         throw new Error("Error creating space");
       }
-    })
+    }),
   );
 
   useEffect(() => {
@@ -71,17 +71,17 @@ const Home = () => {
 
   const invalidParticipantName = useMemo(
     () => !participantName,
-    [participantName]
+    [participantName],
   );
 
   const disableJoin = useMemo(
     () => invalidParticipantName,
-    [invalidParticipantName]
+    [invalidParticipantName],
   );
 
   const isNameInputInvalid = useMemo(
     () => invalidParticipantName && hasBlurredNameInput,
-    [invalidParticipantName, hasBlurredNameInput]
+    [invalidParticipantName, hasBlurredNameInput],
   );
 
   const handleParticipantNameChange = (event: {
@@ -103,13 +103,13 @@ const Home = () => {
         if (message.includes("Not authorized")) {
           setErrorModalTitle("Not authorized to create a new space");
           setErrorModalMessage(
-            "Make sure MUX_TOKEN_ID and MUX_TOKEN_SECRET are set. Refer to the README in https://github.com/muxinc/meet for more details."
+            "Make sure MUX_TOKEN_ID and MUX_TOKEN_SECRET are set. Refer to the README in https://github.com/muxinc/meet for more details.",
           );
           onErrorModalOpen();
         } else if (message.includes("Maximum active spaces reached")) {
           setErrorModalTitle("Maximum active space limit reached");
           setErrorModalMessage(
-            "There are too many active spaces being used. Please try again later."
+            "There are too many active spaces being used. Please try again later.",
           );
           onErrorModalOpen();
         }
@@ -169,6 +169,16 @@ const Home = () => {
                   >
                     Join a New Space
                   </Button>
+
+                  {/* // made with love */}
+                  <Box
+                    fontSize="xs"
+                    color="gray.500"
+                    textAlign="center"
+                    marginTop="1rem"
+                  >
+                    Made with ❤️ by Sujal
+                  </Box>
                 </Stack>
               </form>
             </Box>
